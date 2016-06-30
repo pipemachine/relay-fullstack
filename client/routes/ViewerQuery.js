@@ -1,11 +1,11 @@
 import Relay from 'react-relay';
 
 export default {
-  viewer: (Component) => Relay.QL`
+  result: (Component) => Relay.QL`
     query {
-      viewer {
-        ${Component.getFragment('viewer')}
-      }
+      search{
+        ${Component.getFragment('result')}
     }
+	}
   `
 };

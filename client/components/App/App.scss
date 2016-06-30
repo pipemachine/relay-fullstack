@@ -5,6 +5,7 @@
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  background-color: #EEEEEE;
 }
 
 .greeting {
@@ -21,6 +22,7 @@
 }
 
 .content {
+  background-color: #EEEEEE;
   flex: 1;
   margin: 10px 50px;
 }

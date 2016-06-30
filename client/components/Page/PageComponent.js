@@ -9,11 +9,10 @@ export default class Feature extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className={styles.main}>
         <h1 className={styles.heading}>
           {this.props.heading}
         </h1>
-        <hr />
         {this.props.children}
       </div>
     );

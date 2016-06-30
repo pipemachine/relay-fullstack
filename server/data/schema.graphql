@@ -32,7 +32,32 @@ type PageInfo {
 
 type Query {
   node(id: ID!): Node
+  results(before: String, after: String, first: Int, last: Int, searchStr: String): ResultConnection
+  search: Search
   viewer: User
+}
+
+type Result implements Node {
+  id: ID!
+  name: String
+  price: String
+  url: String
+}
+
+type ResultConnection {
+  pageInfo: PageInfo!
+  edges: [ResultEdge]
+}
+
+type ResultEdge {
+  node: Result
+  cursor: String!
+}
+
+type Search implements Node {
+  id: ID!
+  results(before: String, after: String, first: Int, last: Int, searchStr: String): ResultConnection
+  searchTerm: String
 }
 
 type User implements Node {

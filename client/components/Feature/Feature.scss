@@ -1,21 +1,27 @@
+@import url('https://fonts.googleapis.com/icon?family=Material+Icons');
+
 .card {
   margin: auto;
-  width: 250px;
+  width: 75%;
+  margin-bottom: 40px;
 }
 
-.image {
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: 40% !important;
+.cardTitle{
+  background-color: #F5F5F5;
 }
 
-.name {
-  padding: 0;
+.main{
+  background-color: #EEEEEE;
+}
+
+.searchForm{
+  margin:0 auto;
+  text-align: center
+}
+
+.searchBar{
+  margin:0 auto;
+  width: 50%;
   text-align: center;
-}
-
-.description {
-  padding-bottom: 30px;
-  padding-top: 0;
-  text-align: center;
+  border-bottom-width: 2px;
 }
