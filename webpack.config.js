@@ -28,7 +28,7 @@ if (process.env.NODE_ENV === 'production') {
       }
     }),
     new HtmlWebpackPlugin({
-      title: 'Relay Starter Kit - Integrated with Relay, GraphQL, Express, ES6/ES7, JSX, Webpack, Babel, Material Design Lite, and PostCSS',
+      title: 'Snout',
       template: './client/index.html',
       mobile: true,
       inject: false
@@ -46,7 +46,7 @@ if (process.env.NODE_ENV === 'production') {
     new webpack.NoErrorsPlugin(),
     new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
-      title: 'Relay Starter Kit - Integrated with Relay, GraphQL, Express, ES6/ES7, JSX, Webpack, Babel, Material Design Lite, and PostCSS',
+      title: 'Snout',
       template: './client/index.html',
       mobile: true,
       inject: false

@@ -96,7 +96,7 @@ export default class Feature extends React.Component {
 		      <CardText>
 			{edge.node.name}
 			<h4>{edge.node.url}</h4>
-			<Button  onClick={()=>this.handleClick(edge.node.url)} raised>Preview Result</Button>
+			<Button  onClick={()=>window.open(edge.node.url)} raised>Open Result</Button>
 		      </CardText>
 		    </Card>
 		  );

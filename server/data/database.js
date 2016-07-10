@@ -1,5 +1,5 @@
 var MongoClient = require('mongodb').MongoClient
-var url = 'mongodb://localhost:27017/graphqltest';
+var url = 'mongodb://localhost:27017/graphql';
 var pmongo = require('promised-mongo');
 const db = pmongo(url);
 const featuresCollection = db.collection('features')
