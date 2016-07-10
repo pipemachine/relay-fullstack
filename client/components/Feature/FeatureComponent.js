@@ -1,6 +1,6 @@
 /* eslint-disable global-require */
 import React from 'react';
-import { Grid, Cell, Card, CardTitle, CardText, CardActions, Button, Textfield} from 'react-mdl';
+import { Grid,FABButton,Icon, Cell, Card, CardTitle, CardText, CardActions, Button, Textfield} from 'react-mdl';
 import Page from '../Page/PageComponent';
 import styles from './Feature.scss';
 import request from 'superagent'
@@ -79,14 +79,18 @@ export default class Feature extends React.Component {
 	render() {
 	    return(
 	      <Page className={styles.main}>
+	        <span>
 	          <form onSubmit={this.handleSubmit.bind(this)} className={styles.searchForm}>
-		     <i style={{fontSize:'24px'}} className="material-icons ">search</i>
 		      <Textfield
 		        label="Product name..."
 			ref="searchTerm"
 			className={styles.searchBar}
 		      />
+		      <FABButton onClick={()=>this.handleSubmit} colored>
+		        <Icon name="search"/>
+		      </FABButton>
 		  </form>
+		</span>
 		{this.props.result.results.edges.map(edge => {
 		  return(
 		    <Card className={styles.card} shadow={5}>
@@ -112,7 +116,6 @@ export default class Feature extends React.Component {
 		    var requestString = 'http://samuelellis.me/'+ refinedSearch;
 		    request(requestString, function(err,res){ 
 		    });
-		  //   this.refs.searchTerm.refs.input.value= '';
 		      this.props.relay.setVariables({ searchStr: refinedSearch,});
 			 var c = 0;
 		      setInterval(() => {
