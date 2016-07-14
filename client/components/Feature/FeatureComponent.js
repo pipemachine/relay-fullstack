@@ -1,51 +1,10 @@
 /* eslint-disable global-require */
 import React from 'react';
-import { Grid,FABButton,Icon, Cell, Card, CardTitle, CardText, CardActions, Button, Textfield} from 'react-mdl';
+import { Grid,FABButton,Icon, Cell,Spinner, Card, CardTitle, CardText, CardActions, Button, Textfield} from 'react-mdl';
 import Page from '../Page/PageComponent';
 import styles from './Feature.scss';
-import request from 'superagent'
-
-/*export default class Feature extends React.Component {
-  static propTypes = {
-    viewer: React.PropTypes.object.isRequired
-  };
-
-  render() {
-    return (
-      <Page heading='Integrated with'>
-        <Grid>
-          {this.props.viewer.features.edges.map(edge => {
-            const imageUrl = require(`../../assets/${edge.node.name.toLowerCase()}.png`);
-            return (
-              <Cell col={4} key={edge.node.id}>
-                <Card className={styles.card}>
-                  <CardTitle expand className={styles.image} style={{ backgroundImage: `url(${imageUrl})` }} />
-                  <CardActions className={styles.name}>
-                    <Button colored href={edge.node.url}>{edge.node.name}</Button>
-                  </CardActions>
-                  <CardText className={styles.description}>
-                    {edge.node.description}
-                  </CardText>
-                </Card>
-              </Cell>
-            );
-          })}
-        </Grid>
-      </Page>
-    );
-  }
-}*/
-
-class Frame extends React.Component{
-  static propTypes = {
-    url: React.PropTypes.object.isRequired
-  };
-  render(){
-    return(
-	<iframe src={this.props.url} height="300px"> </iframe>
-    );
-  }
-}
+import request from 'superagent';
+import config from '../../../server/config/environment';
 
 
 export default class Feature extends React.Component {
@@ -55,7 +14,8 @@ export default class Feature extends React.Component {
 	constructor(props){
 	  super(props);
 	  this.state = {
-	    framesToShow: []
+	    framesToShow: [],
+	    showSpinner: false
 	  };
 	}
 	trueCheck(array,item){
@@ -67,19 +27,17 @@ export default class Feature extends React.Component {
 	  }
 	  return check
 	}
-	handleClick(url){
-	  if(this.trueCheck(this.state.framesToShow,url)){
-	    this.setState({framesToShow: this.state.framesToShow.splice(this.state.framesToShow.indexOf(url),1)});
-	  }else{
-	    console.log(this.state.framesToShow);
-	    this.setState({framesToShow:this.state.framesToShow.push(url)});
-	  }
-		console.log("index val for frametoshow: "+ this.trueCheck(this.state.framesToShow,url));
-	}
+
 	render() {
+	    var spinner;
+	    if (this.state.showSpinner){
+	      spinner = <Spinner singleColor />
+	    }
+	    if(this.props.result.results.edges.length > 1){
+	      spinner = null 
+	    }
 	    return(
 	      <Page className={styles.main}>
-	        <span>
 	          <form onSubmit={this.handleSubmit.bind(this)} className={styles.searchForm}>
 		      <Textfield
 		        label="Product name..."
@@ -90,7 +48,10 @@ export default class Feature extends React.Component {
 		        <Icon name="search"/>
 		      </FABButton>
 		  </form>
-		</span>
+		  <div className={styles.spinner}>
+		    {spinner}
+		  </div>
+
 		{this.props.result.results.edges.map(edge => {
 		  return(
 		    <Card className={styles.card} shadow={5}>
@@ -110,10 +71,11 @@ export default class Feature extends React.Component {
 	}
 	    handleSubmit(e) { 
 		    e.preventDefault();
+		    this.setState({showSpinner:true})		    
 		    var search = this.refs.searchTerm.refs.input.value;
 		    var refinedSearch = search.replace("/\ /g ","_").replace("/\'/g","");
 		    console.log(this.props.relay.variables);
-		    var requestString = 'http://samuelellis.me/'+ refinedSearch;
+		    var requestString =`${config.balancer}`+ refinedSearch;
 		    request(requestString, function(err,res){ 
 		    });
 		      this.props.relay.setVariables({ searchStr: refinedSearch,});

@@ -1,8 +1,9 @@
 var MongoClient = require('mongodb').MongoClient
-var url = 'mongodb://localhost:27017/graphql';
 var pmongo = require('promised-mongo');
-const db = pmongo(url);
-const featuresCollection = db.collection('features')
+//var url = 'mongodb://localhost/graphql';
+//const db = pmongo(url);
+var db = pmongo('graphmin:12onetwo@localhost/graphql');
+const featuresCollection = db.collection('features');
 
 
 class User {

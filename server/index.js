@@ -37,6 +37,14 @@ if (config.env === 'development') {
   relayServer.use('/', express.static(path.join(__dirname, '../build')));
   relayServer.listen(config.port, () => console.log(chalk.green(`Relay is listening on port ${config.port}`)));
 } else if (config.env === 'production') {
+  //Added graphql on server for production.
+  const graphql = express();
+  graphql.use('/', graphQLHTTP({
+    graphiql: true,
+    pretty: true,
+    schema
+  }));
+  graphql.listen(config.graphql.port, () => console.log(chalk.green(`GraphQL is listening on port ${config.graphql.port}`)));
   // Launch Relay by creating a normal express server
   const relayServer = express();
   relayServer.use(historyApiFallback());
