@@ -157,6 +157,10 @@ const resultType = new GraphQLObjectType({
     url: {
       type: GraphQLString,
       description: 'The url of the item in the result'
+    },
+    image:{
+      type: GraphQLString,
+      description: 'Url for the image of the result'
     }
   }),
   interfaces: [nodeInterface]

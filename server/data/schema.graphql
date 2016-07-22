@@ -42,6 +42,7 @@ type Result implements Node {
   name: String
   price: String
   url: String
+  image: String
 }
 
 type ResultConnection {

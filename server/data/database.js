@@ -32,11 +32,12 @@ class Feature {
 }
 
 class Result {
-  constructor(id, name, price, url){
+  constructor(id, name, price, url,image){
     this.id = id;
     this.name = name;
     this.price = price;
     this.url = url;
+    this.image=image;
   }
 }
 
@@ -60,15 +61,15 @@ function getResult(id){
 
 function getResults(searchStr){
 	var q = (searchStr) ? {"search_term":searchStr} : {"search_term":"default for no results"};
-	console.log(q);
 	var promise= featuresCollection.find(q).toArray().then(function(docs){
 		var newResults = [];
 	  for(var i = 0;i< docs.length; i++){
 		  var str = docs[i].search_term;
 	    const resultConvert = new Result(docs[i]._id.toString(),
-					     str,
-					     docs[i].price[0]+docs[i].price[1], 
-					     docs[i].url);
+					     docs[i].title,
+					     "$"+docs[i].price, 
+					     docs[i].url,
+					     docs[i].image);
 	    newResults.push(resultConvert);
 	  }
 	  return newResults;

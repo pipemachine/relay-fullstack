@@ -15,6 +15,7 @@ export default Relay.createContainer(Feature, {
               name
               price
               url
+	      image
             }
           } 
         }

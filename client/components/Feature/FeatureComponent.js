@@ -33,7 +33,7 @@ export default class Feature extends React.Component {
 	    if (this.state.showSpinner){
 	      spinner = <Spinner singleColor />
 	    }
-	    if(this.props.result.results.edges.length > 1){
+	    if(this.props.result.results.edges.length > 0){
 	      spinner = null 
 	    }
 	    return(
@@ -59,6 +59,7 @@ export default class Feature extends React.Component {
 		        {edge.node.price}
 		      </CardTitle>
 		      <CardText>
+		        <img src={edge.node.image} width="50"/>
 			{edge.node.name}
 			<h4>{edge.node.url}</h4>
 			<Button  onClick={()=>window.open(edge.node.url)} raised>Open Result</Button>
