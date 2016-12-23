@@ -3,4 +3,4 @@
 remoteCI='ssh -i ./circle/middlemanServer ubuntu@54.187.239.243'
 
 #$remoteCI aws ecr get-login --region us-west-2 | bash
-$remoteCI /home/ubuntu/ecs-deploy -c tend -n BossService -i 948369953119.dkr.ecr.us-west-2.amazonaws.com/boss:latest -t 150
+$remoteCI /home/ubuntu/ecs-deploy -c tend -n BossService -i 948369953119.dkr.ecr.us-west-2.amazonaws.com/boss:latest -t 500
