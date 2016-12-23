@@ -14,9 +14,9 @@ machine:
 
 checkout:
     post:
-        -chmod +x ./circle/deployBoss
-        -chmod +x ./circle/ecs-deploy
-        -chmod +x ./circle/updateAndTestBoss
+        - chmod +x ./circle/deployBoss
+        - chmod +x ./circle/ecs-deploy
+        - chmod +x ./circle/updateAndTestBoss
 
 dependencies:
     post:
