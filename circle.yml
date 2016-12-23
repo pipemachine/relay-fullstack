@@ -1,0 +1,37 @@
+general:
+  branches:
+    only:
+      - production 
+    ignore:
+      - master
+
+machine:
+    node:
+        version:
+            6.*
+    services:
+        - docker
+
+checkout:
+    post:
+        -chmod +x ./circle/deployBoss
+        -chmod +x ./circle/ecs-deploy
+        -chmod +x ./circle/updateAndTestBoss
+
+dependencies:
+    post:
+        - sudo pip install --upgrade awscli
+        - sudo apt-get update && sudo apt-get install jq
+        - curl -L -o ~/bin/jq https://github.com/stedolan/jq/releases/download/jq-1.5rc1/jq-linux-x86_64-static && chmod +x ~/bin/jq
+        - ./circle/updateAndTestBoss
+
+test:
+    override:
+        - echo "no tests configured yet"
+
+deployment:
+    prod:
+        branch: production
+        commands:
+            - ./circle/deployBoss
+
