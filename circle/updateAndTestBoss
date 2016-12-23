@@ -1,6 +1,6 @@
 #!/bin/bash
 
-remoteCI='ssh -i middlemanServer ec2-user@54.187.113.187'
+remoteCI='ssh -i ./circle/middlemanServer ec2-user@54.187.113.187'
 boss=948369953119.dkr.ecr.us-west-2.amazonaws.com/boss:latest
 updatePullCmd='git pull'
 
