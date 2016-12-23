@@ -18,7 +18,6 @@ checkout:
         - chmod +x ./circle/ecs-deploy
         - chmod +x ./circle/updateAndTestBoss
         - chmod 600 ./circle/middlemanServer
-        - ssh -i ./circle/middlemanServer ec2-user@54.187.113.187 ls  
 
 dependencies:
     post:
