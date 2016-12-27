@@ -1,13 +1,15 @@
 #!/bin/bash
 
 remoteCI='ssh -i ./circle/middlemanServer ubuntu@54.187.239.243'
-boss=948369953119.dkr.ecr.us-west-2.amazonaws.com/boss:latest
+boss=948369953119.dkr.ecr.us-west-2.amazonaws.com/boss:production
 updatePullCmd='git pull'
 
 $remoteCI aws ecr get-login --region us-west-2 | bash
 #$remoteCI docker pull $boss
 psID=`$remoteCI docker run -d -w="/root/boss" -t $boss `
+$remoteCI docker exec -t $psID export NODE_ENV=production
 $remoteCI docker exec -t $psID $updatePullCmd
+$remoteCI docker exec -t $psID sequelize db:migrate 
 #run tests here
 $remoteCI docker commit --pause=false $psID $boss
 $remoteCI docker stop $psID
