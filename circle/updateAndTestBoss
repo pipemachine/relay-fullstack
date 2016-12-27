@@ -9,7 +9,8 @@ $remoteCI aws ecr get-login --region us-west-2 | bash
 psID=`$remoteCI docker run -d -w="/root/boss" -t $boss `
 $remoteCI docker exec -t $psID export NODE_ENV=production
 $remoteCI docker exec -t $psID $updatePullCmd
-$remoteCI docker exec -t $psID sequelize db:migrate 
+$remoteCI docker exec -t $psID cd boss && sequelize db:migrate 
+$remoteCI docker exec -t $psID cd boss && npm install 
 #run tests here
 $remoteCI docker commit --pause=false $psID $boss
 $remoteCI docker stop $psID
